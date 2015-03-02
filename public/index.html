@@ -475,29 +475,40 @@
 
         $("#tsignup").click(function(){
             var email = $("#temail").val();
-            var data = {
-                Email: email,
-                addtogroup:174,
-                dupcheck:"Email"
-            };
 
-            sendpacket(data);
+            if(email){
+                var data = {
+                    Email: email,
+                    addtogroup:164,  // infopartner
+                    dupcheck:"Email"
+                };
+                sendpacket(data);
+            } else {
+                toastr.error("Sorry about this but we need an email address from you.");
+            }
+
             return false;
         });
 
           $("#csignup").click(function(){
               var email = $("#cemail").val();
-              var name = $("#cname").val();
+              var name = $("#cname").val().split(" ");
 
+              if(name && email){
+                  var data = {
+                      FirstName: name[0],
+                      LastName: (name[1])?name[1]: "",
+                      Email: email,
+                      addtogroup:166, //coreteam
+                      dupcheck:"Email"
+                  };
 
-                var data = {
-                    FirstName: name,
-                    Email: email,
-                    addtogroup:176,
-                    dupcheck:"Email"
-                };
+                  sendpacket(data);
 
-              sendpacket(data);
+              } else {
+                  toastr.error("Sorry about this but we need both a name and an email address from you.");
+              }
+
               return false;
           });
 
