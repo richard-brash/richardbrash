@@ -11,6 +11,15 @@ router.get("/", function(req,res){
     res.json({Message:"Here we are"});
 });
 
+router.post("/addToGroup", function(req,res){
+
+    var input = req.body;
+    InfusionsoftApiClient.Caller("ContactService.addToGroup", [input.cid, parseInt(input.grpId)], function(error, valuegrp){
+        res.json(valuegrp);
+    });
+
+});
+
 router.post("/formhandler", function(req,res){
 
     var input = req.body;
@@ -21,6 +30,7 @@ router.post("/formhandler", function(req,res){
     var errorUrl = null;
     var clientid = null;
     var dupcheck = null;
+    var groups = [];
     var posted = {};
 
     for(var attrib in input){
@@ -44,6 +54,8 @@ router.post("/formhandler", function(req,res){
             case "addtogroup":
                 grpid = input[attrib];
                 break;
+            case "groups":
+                groups = input[attrib];
             default:
                 posted[attrib] = input[attrib];
 
@@ -73,6 +85,14 @@ router.post("/formhandler", function(req,res){
             if(asid != null){
                 InfusionsoftApiClient.Caller("ContactService.runActionSequence", [value, parseInt(asid)], function(error, valueas){});
             }
+
+            if(groups.length != 0){
+                for (var gid in groups) {
+                    InfusionsoftApiClient.Caller("ContactService.addToGroup", [value, parseInt(groups[gid])], function(error, valuegrp){});
+                }
+
+            }
+
 
             posted["Id"] = value;
             posted["message"] = "Data posted";
