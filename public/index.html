@@ -467,10 +467,6 @@
               var name = $("#name").val().split(" ");
               var groups = [];
 
-              if($("#coreteam").is(":checked")){
-                  groups.push(166);
-              }
-
               if($("#huddle1").is(":checked")){
                   groups.push(168);
               }
@@ -483,7 +479,7 @@
                       FirstName: name[0],
                       LastName: (name[1])?name[1]: "",
                       Email: email,
-                      addtogroup:164, //infopartner
+                      addtogroup: ($("#coreteam").is(":checked")) ? 166:164, //coreteam or infopartner
                       groups: groups,
                       dupcheck:"Email"
                   };

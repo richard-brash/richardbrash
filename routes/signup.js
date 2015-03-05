@@ -63,6 +63,7 @@ router.post("/formhandler", function(req,res){
 
     }
 
+    var email = posted["Email"];
     var service = null;
     var packet = [posted];
 
@@ -78,17 +79,30 @@ router.post("/formhandler", function(req,res){
 
         if(!error){
 
+            if(email){
+                InfusionsoftApiClient.Caller("APIEmailService.optIn", [email, "Team member signup"], function(error, optin){
+                    console.log("Optin error:" + error);
+                    console.log("Optin:" + optin);
+                });
+            }
+
             if(grpid != null){
-                InfusionsoftApiClient.Caller("ContactService.addToGroup", [value, parseInt(grpid)], function(error, valuegrp){});
+                InfusionsoftApiClient.Caller("ContactService.addToGroup", [value, parseInt(grpid)], function(error, valuegrp){
+                    console.log("addToGroup:" + grpid + " " + valuegrp);
+                });
             }
 
             if(asid != null){
-                InfusionsoftApiClient.Caller("ContactService.runActionSequence", [value, parseInt(asid)], function(error, valueas){});
+                InfusionsoftApiClient.Caller("ContactService.runActionSequence", [value, parseInt(asid)], function(error, valueas){
+                    console.log("runActionSequence:" + valueas);
+                });
             }
 
             if(groups.length != 0){
                 for (var gid in groups) {
-                    InfusionsoftApiClient.Caller("ContactService.addToGroup", [value, parseInt(groups[gid])], function(error, valuegrp){});
+                    InfusionsoftApiClient.Caller("ContactService.addToGroup", [value, parseInt(groups[gid])], function(error, valuegrp){
+                        console.log("addToGroup:" + groups[gid] + " " + valuegrp);
+                    });
                 }
 
             }
