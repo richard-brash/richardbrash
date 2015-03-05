@@ -232,9 +232,9 @@
                                         <h1>Address Bankrupt Morals</h1>
                                         <div class="caption">
                                             <p>
-                                                Men have mistresses and children with several women.
-                                                Women have been conditioned to accept this reality.
-                                                Many unhealthy family relationships with poor role models.
+                                                Married men will father children both inside and outside their marriage.
+                                                Women have been conditioned to accept that their husbands may likely have a mistress.
+                                                There are many unhealthy family relationships with poor role models.
                                                 Prostitution is legal on the Island.
                                             </p>
                                         </div>
@@ -462,6 +462,10 @@
   <script>
       $(document).ready(function(){
 
+          toastr.options = {
+              "positionClass": "toast-bottom-full-width",
+          }
+
           $("#signupsubmit").click(function(){
               var email = $("#email").val();
               var name = $("#name").val().split(" ");
@@ -508,7 +512,6 @@
               dataType: 'json',
               data: JSON.stringify(data),
               success: function(msg) {
-
                   toastr.success("Your team membership has been recorded.  Thank You!");
 
               },
