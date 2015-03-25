@@ -73,7 +73,7 @@
 				<div class="col-lg-7 col-lg-offset-5 col-md-8 col-md-offset-4 col-sm-10 col-sm-offset-1 col-xs-12">
 					<div class="cont-wrapper">
 						<p class="intro">Serving the Mesoamerica Region as Genesis missionaries assigned to Curacao.</p>
-						<p class="btn-wrp"><a href="#contact" class="c2a-button">Catch The Vision &raquo;</a></p>
+						<p class="btn-wrp"><a href="#signup" class="c2a-button">Catch The Vision &raquo;</a></p>
 					</div><!-- end cont wrapper -->
 				</div><!-- end 8 -->
  			</div>
@@ -99,7 +99,7 @@
                 Our family will begin our assignment on May 2, 2015 with Missionary training in Santo Domingo, Dominican Republic. The training will last one month and afterwards we will be assigned to the work in Curacao. Pray with us that God will use our family to become the hands and feet of Christ in Curacao.
             </p>
 			<p><strong><em>Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, and teaching them to obey everything I have commanded you. (Matt 28:19-20)</em></strong></p>
-			<p class="btn-wrp"><a  href="#contact" class="c2a-button">Join our team &raquo;</a></p>
+			<p class="btn-wrp"><a  href="#signup" class="c2a-button">Join our team &raquo;</a></p>
             <div class="fb-like" data-href="https://www.facebook.com/1556787237894959" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 		</div>
 		<div class="col-lg-5 col-md-5 col-sm-5 ipad hidden-xs">
@@ -137,7 +137,7 @@
 				</div>
 				</div>
 				<img src="images/Caribbean_Map.png" alt="responsiveShot" class="img-responsive" >
-                <p class="btn-wrp"><a href="#contact" class="c2a-button">Stay informed &raquo;</a></p>
+                <p class="btn-wrp"><a href="#signup" class="c2a-button">Stay informed &raquo;</a></p>
 				<!-- stop editing here -->
 			</div>
 	<!-- end item -->
@@ -153,7 +153,7 @@
 				</div>
 				</div>
 				<img src="images/curacao_flag.jpeg" alt="responsiveShot" class="img-responsive" >
-            <p class="btn-wrp"><a href="#contact" class="c2a-button">Stay informed &raquo;</a></p>
+            <p class="btn-wrp"><a href="#signup" class="c2a-button">Stay informed &raquo;</a></p>
 				<!-- stop editing here -->
 			</div>
 	<!-- end item -->
@@ -170,7 +170,7 @@
 				</div>
 				</div>
 				<img src="images/curacao_map.gif" alt="responsiveShot" class="img-responsive" >
-            <p class="btn-wrp"><a href="#contact" class="c2a-button">Stay informed &raquo;</a></p>
+            <p class="btn-wrp"><a href="#signup" class="c2a-button">Stay informed &raquo;</a></p>
 				<!-- stop editing here -->
 			</div>
 	<!-- end item -->
@@ -190,7 +190,7 @@
                   </div>
               </div>
               <img src="images/Curacao_Downtown.jpg" alt="responsiveShot" class="img-responsive" >
-              <p class="btn-wrp"><a href="#contact" class="c2a-button">Stay informed &raquo;</a></p>
+              <p class="btn-wrp"><a href="#signup" class="c2a-button">Stay informed &raquo;</a></p>
               <!-- stop editing here -->
           </div>
           <!-- end item -->
@@ -396,7 +396,7 @@
 			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 				<h3>Join our <b><em>Team</em></b></h3>
 				<p>
-                    Think of the team like this: For every soldier sent to the front lines to fight, there is a whole support team of more than 100 people working hard to support those efforts. The support soldiers “back home” are perhaps even more important than the ones on the ground.
+                    Think of the team like this: For every soldier sent to the front lines to fight, there is a whole support team of many people working hard to support those efforts. The support soldiers “back home” are perhaps even more important than the ones on the ground.
                 </p>
 			</div>
 		</div><!-- end row -->
@@ -420,11 +420,10 @@
 					<form>
                         <p><input class="form-control" id="name" placeholder="Enter name"></p>
                         <p><input class="form-control" id="email" placeholder="Enter email"></p>
-                        <p><input type="checkbox" checked id="infopartner"/>Yes, I will pray for you and the ministry and want to receive general updates.<br/> (Monthly Newsletter that includes general new, prayer requests, and praise reports.)</p>
-                        <p><input type="checkbox" id="coreteam"/> I want to be part of the <b><em>Core Team</em></b><br/> (Leave unchecked if you want to be updated en mass and will pray as the Spirit leads.)
+                        <div><input type="checkbox" checked id="support"/>Yes, I want to financially support the ministry.</div>
+                        <div><input type="checkbox" checked id="coreteam"/>Yes, I want to be part of the <b><em>Core Team</em></b></div>
+                        <div><input type="checkbox" checked id="infopartner"/>Yes, I will pray for you and the ministry and want to receive general Newsleter updates.</div>
                         <div class="text-muted">A <b><em>Core Team</em></b> member is someone we can reach out to for <b>right now</b> prayer concerns as they come up. Core Team members will be a critical component of our support network and will receive our regular updates as well as occasional <em>special requests</em>. </div>
-                        </p>
-
 
                         <p><button id="signupsubmit" class="btn btn-db">Yes, sign me up!</button></p>
                     </form>
@@ -474,13 +473,6 @@
               var name = $("#name").val().split(" ");
               var groups = [];
 
-              if($("#huddle1").is(":checked")){
-                  groups.push(168);
-              }
-              if($("#huddle2").is(":checked")){
-                  groups.push(170);
-              }
-
               if(name && email){
                   var data = {
                       FirstName: name[0],
@@ -491,7 +483,30 @@
                       dupcheck:"Email"
                   };
 
-                  sendpacket(data);
+                  $.ajax({
+                      contentType: 'application/json',
+                      type: 'POST',
+                      url: "signup/formhandler",
+                      dataType: 'json',
+                      data: JSON.stringify(data),
+                      success: function(msg) {
+
+                          toastr.success("Your team membership has been recorded.  Thank You!");
+
+                          if($("#support").is(":checked")){
+                              window.location.href = "http://web.nazarene.org/goto/brash";
+                          }
+
+                      },
+                      error: function (xhr, ajaxOptions, thrownError) {
+                          toastr.error("We had trouble saving your team membership, please try again later.");
+                          console.log(xhr);
+                          console.log(ajaxOptions);
+                          console.log(thrownError);
+                      }
+                  });
+
+
 
               } else {
                   toastr.error("Sorry about this but we need both a name and an email address from you.");
@@ -502,36 +517,6 @@
 
       });
 
-      var sendpacket = function(data){
-
-
-          console.log(data);
-
-
-          $.ajax({
-              contentType: 'application/json',
-              type: 'POST',
-              url: "signup/formhandler",
-              dataType: 'json',
-              data: JSON.stringify(data),
-              success: function(msg) {
-                  toastr.success("Your team membership has been recorded.  Thank You!");
-
-              },
-              error: function (xhr, ajaxOptions, thrownError) {
-                  toastr.error("We had trouble saving your team membership, please try again later.");
-                  console.log(xhr);
-                  console.log(ajaxOptions);
-                  console.log(thrownError);
-              }
-          });
-
-
-
-
-
-
-      }
   </script>
 
     <script>
