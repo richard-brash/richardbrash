@@ -291,6 +291,18 @@ nav a {
   #signup h3 {
     color: #fff; }
 
+
+/* ================= Doante UP SECTION ======================== */
+#donate {
+    background: #f1784d;
+    color: #fff;
+    padding: 30px 0 60px 0;
+    xtext-align: center;
+}
+#donate h3 {
+    color: #fff; }
+
+
 /* ================= CONTACT SECTION ======================== */
 #contact {
   background: #f8f8f8;
