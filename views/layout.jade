@@ -1,7 +1,60 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    title= 'Richard and Karen Brash -- Curacao'
+    meta(charset='utf-8')
+    link(rel="shortcut icon" href="/ico/favicon.png")
+    link(rel="dns-prefetch" href="//fonts.googleapis.com")
+
+    link(rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css")
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/toastr.min.css')
+    link(rel='stylesheet', href='/css/beachstrap-styles.css')
+
+    script(src="bootstrap/assets/js/html5shiv.js")
+    script(src="bootstrap/assets/js/respond.min.js")
+
+
+    body(data-spy="scroll" data-target="#navigation")
+        div(id="fb-root")
+
+
+        div(id="content")
+            header
+                div.container
+                    div.row
+                        div.col-lg-3.col-md-3.col-sm-10.col-xs-9
+                            h1(id="logo") Curacao<
+
+                        div.col-sm-2.col-xs-3.visible-sm.text-right.visible-xs
+                            a(href="#" title="nav" class="mini-nav")
+                                i.fa.fa-reorder
+
+                        div.col-lg-7.col-lg-offset-2.col-md-8.col-md-offset-1.col-sm-12.col-xs-12
+                            nav( id="navigation")
+                                ul.nav
+                                    li.active
+                                        a(href="#main" title="Home") Home
+                                    li
+                                        a(href="#vision" title="Vision") Curacao / Vision
+                                    li
+                                        a(href="#family" title="family") Family
+                                    li
+                                        a(href="#signup" title="Connect") Signup / Donate
+            div.wrap
+                div.container
+                    div.row
+                        div.span8
+                            block content
+                        div.span4
+                            div.well.sidebar-nav
+                                ul.nav.nav-list
+                                    li.nav-header categories
+                                    - each cat in getCategories()
+                                        li
+                                            a(href=categoryURL(cat)) #{cat}
+                                    li.nav-header tags
+                                    - each tag in getTags()
+                                        li
+                                            a(href=tagURL(tag)) #{tag}
+
