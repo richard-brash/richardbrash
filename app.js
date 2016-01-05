@@ -24,6 +24,14 @@ console.log = function(d) { //
     log_stdout.write(util.format(d) + '\n');
 };
 
+//var poet    = require('poet')( app );
+//poet
+//    .createPostRoute()
+//    .createPageRoute()
+//    .createTagRoute()
+//    .createCategoryRoute()
+//    .init();
+
 var poet = Poet(app, {
     postsPerPage: 5,
     posts: './_posts',
@@ -38,6 +46,7 @@ var poet = Poet(app, {
 
 
 poet.init().then(function () {
+    console.log("*** POET is initialized ***");
     // ready to go!
 });
 
