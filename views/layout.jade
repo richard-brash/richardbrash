@@ -10,6 +10,7 @@ html
     link(rel='stylesheet', href='/css/bootstrap.css')
     link(rel='stylesheet', href='/css/toastr.min.css')
     link(rel='stylesheet', href='/css/beachstrap-styles.css')
+    link(rel='stylesheet', href='/css/custom.css')
 
     script(src="/bootstrap/assets/js/html5shiv.js")
     script(src="/bootstrap/assets/js/respond.min.js")
@@ -41,12 +42,12 @@ html
                                         a(href="/#family" title="family") Family
                                     li
                                         a(href="/#signup" title="Connect") Signup / Donate
-            div.wrap
+            div.wrap.drop
                 div.container
                     div.row
-                        div.span8
+                        div.col-lg-8.col-md-8.col-sm-12.col-xs-12
                             block content
-                        div.span4
+                        div.col-lg-4.col-md-4.col-sm-12.col-xs-12
                             div.well.sidebar-nav
                                 ul.nav.nav-list
                                     li.nav-header categories

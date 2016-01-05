@@ -20,7 +20,7 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
+/*hgroup,*/
 main,
 nav,
 section,
@@ -5475,9 +5475,11 @@ button.close {
   filter: alpha(opacity=50);
   opacity: .5;
 }
+/*
 .carousel-control.left {
   background-image:  background-repeat: repeat-x;
 }
+*/
 .carousel-control.right {
   right: 0;
   left: auto;
@@ -5668,9 +5670,11 @@ button.close {
 .affix {
   position: fixed;
 }
+/*
 @-ms-viewport {
   width: device-width;
 }
+*/
 .visible-xs,
 .visible-sm,
 .visible-md,
