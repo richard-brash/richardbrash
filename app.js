@@ -1,9 +1,12 @@
 var express = require('express');
 var Poet = require('poet');
 var path = require('path');
-var fs = require('fs')
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+
+var fs = require('fs');
+var util = require('util');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -13,8 +16,13 @@ var signup = require('./routes/signup');
 
 var app = express();
 
-// create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(__dirname + '/access.log', {flags: 'a'})
+var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+};
 
 var poet = Poet(app, {
     postsPerPage: 5,
@@ -41,11 +49,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
-
-//app.use(logger('dev'));
-app.use(logger('common', {stream: accessLogStream}));
 app.use(logger('dev'));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
