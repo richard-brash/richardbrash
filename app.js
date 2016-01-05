@@ -44,11 +44,14 @@ var poet = Poet(app, {
     }
 });
 
-
-poet.init().then(function () {
+poet.init(function(){
     console.log("*** POET is initialized ***");
-    // ready to go!
-});
+})
+
+//poet.init().then(function () {
+//
+//    // ready to go!
+//});
 
 
 
